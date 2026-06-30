@@ -55,11 +55,11 @@ Assembly testing code
 
 Final register state:
 
-s0 (x8) = 163
-sp (x2) = 128
-t0 (x5) = 7
-t1 (x6) = 10
-all other registers = 0
+- s0 (x8) = 163
+- sp (x2) = 128
+- t0 (x5) = 7
+- t1 (x6) = 10
+- all other registers = 0
 
 ![image_alt]()
 
