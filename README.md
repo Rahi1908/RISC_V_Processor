@@ -19,7 +19,7 @@ A clean, reference implementation where every instruction completes in a single 
 
 ### Pipelined Design
 
-![image_alt]()
+![image_alt](https://github.com/Rahi1908/RISC_V_Processor/blob/6cb5f2c270286093cc40f29c4edfe0e9272268a7/Pipelined_core/docs/architectture.jpeg)
 
 
 A full 5-stage pipelined core derived from the single-cycle design. Each stage operates concurrently on different instructions, improving throughput. Extends the single-cycle support with complete load/store granularity (`LB`, `LH`, `LW`, `SB`, `SH`, `SW`), all 6 branch types (`BEQ`, `BNE`, `BLT`, `BGE`, `BLTU`, `BGEU`), and `JAL` for jumps — totalling **~37 instructions**. A dedicated hazard unit handles all data and control hazards.
