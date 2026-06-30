@@ -53,6 +53,17 @@ Assembly testing code
 
 <img src="https://github.com/Rahi1908/RISC_V_Processor/blob/600ffab937d8b7d4f480cfe114add1a457d46f43/Single_cycle_core/docs/assembly_code.png" width="500" alt="pipelined_architecture">
 
+Final register state:
+
+s0 (x8) = 163
+sp (x2) = 128
+t0 (x5) = 7
+t1 (x6) = 10
+all other registers = 0
+
+![image_alt]()
+
+
 ---
 
 ## Future Enhancements
