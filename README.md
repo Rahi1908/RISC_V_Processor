@@ -100,7 +100,18 @@ Pipelined Processor Output
 <img src="https://github.com/Rahi1908/RISC_V_Processor/blob/b36ed30f5d1d9aeba49501b2d5ed577ba30b324a/Single_cycle_core/docs/metrics.png" width="500" alt="pipelined_architecture">
 
 ---
+## Implementation Reports
 
+Single cycle
+
+![image_alt](https://github.com/Rahi1908/RISC_V_Processor/blob/ba5a5123d7a9b44d19a890de4bd58afcd3eaec8a/Single_cycle_core/docs/reports.png)
+
+Pipelined 
+
+![image_alt]()
+
+
+---
 ## Future Enhancements
 
 - [ ] Add full RV32M extension (multiply/divide)
