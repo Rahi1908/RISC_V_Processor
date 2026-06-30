@@ -12,10 +12,16 @@ A Verilog implementation of a RISC-V 32-bit integer (RV32I) processor built two 
 
 ### Single-Cycle Design Architecture 
 
-![image_alt]()
+![image_alt](https://github.com/Rahi1908/RISC_V_Processor/blob/ff484e60ca3a84427d882ef8c2ba717bad158e94/Single_cycle_core/docs/top_level.png)
+
+
 A clean, reference implementation where every instruction completes in a single clock cycle across all stages — Fetch, Decode, Execute, Memory, and Writeback. Simple control logic with a two-level decoder (main decoder + ALU decoder). Supports **R-type, I-type (arithmetic), Load (`LW` only), Store (`SW` only), and Branch (`BEQ` only)** — totalling **~20 instructions**.
 
 ### Pipelined Design
+
+![image_alt]()
+
+
 A full 5-stage pipelined core derived from the single-cycle design. Each stage operates concurrently on different instructions, improving throughput. Extends the single-cycle support with complete load/store granularity (`LB`, `LH`, `LW`, `SB`, `SH`, `SW`), all 6 branch types (`BEQ`, `BNE`, `BLT`, `BGE`, `BLTU`, `BGEU`), and `JAL` for jumps — totalling **~37 instructions**. A dedicated hazard unit handles all data and control hazards.
 
 ---
