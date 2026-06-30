@@ -15,37 +15,34 @@ A Verilog implementation of a RISC-V 32-bit integer (RV32I) processor built two 
 ![image_alt](https://github.com/Rahi1908/RISC_V_Processor/blob/ff484e60ca3a84427d882ef8c2ba717bad158e94/Single_cycle_core/docs/top_level.png)
 
 
-A clean, reference implementation where every instruction completes in a single clock cycle across all stages — Fetch, Decode, Execute, Memory, and Writeback. Simple control logic with a two-level decoder (main decoder + ALU decoder). Supports **R-type, I-type (arithmetic), Load (`LW` only), Store (`SW` only), and Branch (`BEQ` only)** — totalling **~20 instructions**.
+This diagram shows the classic single-cycle RV32I datapath: the PC feeds instruction memory, whose output splits into the opcode (driving the Control unit for Branch/MemRead/MemtoReg/ALUOp/MemWrite/ALUSrc/RegWrite), the register-file address fields (rs1/rs2/rd), and the immediate generator. ALUSrc selects between register data 2 and the sign-extended immediate as the second ALU operand; ALUOp plus funct fields go through the ALU control to pick the operation, and the Zero flag combined with Branch decides (via the AND gate and PC-target adder) whether PC+4 or the branch target is selected for the next PC. MemRead/MemWrite control data memory access, and MemtoReg chooses between ALU result and memory read data for the final register write-back, all happening combinationally within one clock cycle.
+
+Single-Cycle supports:
+
+- R-type: ADD, SUB, AND, OR, XOR, SLL, SRL, SRA, SLT, SLTU
+- I-type: ADDI, ANDI, ORI, XORI, SLLI, SRLI, SRAI, SLTI, SLTIU
+- Load/Store: LW, SW
+- Branch: BEQ only
+
 
 ### Pipelined Design
 
 ![image_alt](https://github.com/Rahi1908/RISC_V_Processor/blob/6cb5f2c270286093cc40f29c4edfe0e9272268a7/Pipelined_core/docs/architectture.jpeg)
 
 
-A full 5-stage pipelined core derived from the single-cycle design. Each stage operates concurrently on different instructions, improving throughput. Extends the single-cycle support with complete load/store granularity (`LB`, `LH`, `LW`, `SB`, `SH`, `SW`), all 6 branch types (`BEQ`, `BNE`, `BLT`, `BGE`, `BLTU`, `BGEU`), and `JAL` for jumps — totalling **~37 instructions**. A dedicated hazard unit handles all data and control hazards.
+The pipelined RV32I datapath extends the PC through five stages: IF fetches the instruction (instruction_mem) and computes PC+4 (alu_four); pp_stage_2 latches these into ID, where controlpath generates control signals, reg_file reads operands, and extender_offsethandler builds the immediate; pp_stage_3 latches into EX, where mux_32_3in forwarding muxes (driven by hazard_unit's ForwardAE/ForwardBE) select between register data, MEM-stage result, and WB-stage result to resolve RAW hazards, after which the ALU executes and alu_pc/bj_det compute and evaluate the branch/jump target; pp_stage_4 latches into MEM, where data_mem performs the load/store; and pp_stage_5 latches into WB, where mux_32_3in selects between ALU result, memory data, and PC+4 for register write-back. The hazard_unit also detects load-use hazards and stalls the IF/ID boundary one cycle, while a taken branch/jump flushes the IF and ID stage registers via the bj signal.
 
----
+Pipelined supports (everything above, plus):
 
-## Features
+- Load: LB, LH, LW (byte/half/word granularity via w/hw/b signals)
+- Store: SB, SH, SW
+- Branches: BEQ, BNE, BLT, BGE, BLTU, BGEU (via bj_det's funct3 cases)
+- Jump: JAL
+- MEM→EX and WB→EX forwarding (ForwardAE/ForwardBE)
+- Load-use stall (hazard_unit, 1-cycle)
+- Branch/jump flush (bj_det → flush signal, clears IF/ID)
+- Pipeline registers at all 4 boundaries (pp_stage_2 through pp_stage_5)
 
-### Single-Cycle
-- ✅ R-type: `ADD` `SUB` `AND` `OR` `XOR` `SLL` `SRL` `SRA` `SLT` `SLTU`
-- ✅ I-type: `ADDI` `ANDI` `ORI` `XORI` `SLLI` `SRLI` `SRAI` `SLTI` `SLTIU`
-- ✅ Load / Store: `LW`, `SW`
-- ✅ Branch: `BEQ` only
-- ✅ Two-level control unit (main decoder + ALU decoder)
-- ✅ Immediate generation via dedicated ImmGen module
-
-### Pipelined
-- ✅ All single-cycle instructions, plus:
-- ✅ Load: `LB` `LH` `LW` (with byte/halfword/word granularity)
-- ✅ Store: `SB` `SH` `SW`
-- ✅ Branches: `BEQ` `BNE` `BLT` `BGE` `BLTU` `BGEU`
-- ✅ Jump: `JAL`
-- ✅ MEM→EX and WB→EX data forwarding
-- ✅ Load-use hazard detection with 1-cycle stall
-- ✅ Branch/jump flush at EX stage (flush IF/ID on taken)
-- ✅ Pipeline registers for all 4 stage boundaries (IF/ID, ID/EX, EX/MEM, MEM/WB)
 
 ---
 
