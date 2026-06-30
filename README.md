@@ -49,17 +49,9 @@ RTL analysis
 
 ## Testing
 
-### Unit Testing
-Each module (ALU, register file, control path, data memory, hazard unit, etc.) was individually instantiated and tested with targeted inputs to verify correct output before integration.
+Assembly testing code 
 
-### Integration Testing
-The full top-level design was simulated with a custom hex program loaded via `$readmemh`. Waveforms were inspected in Vivado to confirm correct instruction execution, register writeback, memory access, and hazard resolution across multiple instruction sequences.
-
-### Performance Evaluation
-The pipelined design was compared against the single-cycle baseline:
-- Single-cycle executes one instruction per multiple-gate-delay cycle
-- Pipeline achieves near 1 IPC with stall penalties only on load-use and taken branches
-- Forwarding eliminates most data hazard stalls without extra cycles
+<img src="https://github.com/Rahi1908/RISC_V_Processor/blob/600ffab937d8b7d4f480cfe114add1a457d46f43/Single_cycle_core/docs/assembly_code.png" width="500" alt="pipelined_architecture">
 
 ---
 
