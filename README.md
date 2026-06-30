@@ -25,7 +25,7 @@ RTL analysis
 
 ![image_alt](https://github.com/Rahi1908/RISC_V_Processor/blob/b55011220f9a8f507b2961219c79e0e049557ef9/Single_cycle_core/docs/RTL_analysis.png)
 
-### Pipelined Design
+### Pipelined Design Architecture 
 
 <img src="https://github.com/Rahi1908/RISC_V_Processor/raw/6cb5f2c270286093cc40f29c4edfe0e9272268a7/Pipelined_core/docs/architectture.jpeg" width="900" alt="pipelined_architecture">
 
@@ -39,6 +39,8 @@ Pipelined supports (everything above, plus):
 - Load-use stall (hazard_unit, 1-cycle)
 - Branch/jump flush (bj_det → flush signal, clears IF/ID)
 - Pipeline registers at all 4 boundaries (pp_stage_2 through pp_stage_5)
+
+RTL analysis
 
 ![image_alt](https://github.com/Rahi1908/RISC_V_Processor/blob/039b0489ef0e0aae468515df26a9ff6ccb5eda1e/Pipelined_core/docs/RTL_analysis.png) 
 
