@@ -30,8 +30,8 @@ output reg signed [31:0] offset
                         3'b000: // signed 12 - 32 bit (I type)
                         offset = (ins_i[11]) ? {{20{1'b1}},ins_i[11:0]} : {{20{1'b0}} , ins_i[11:0]};
                         
-                        3'b001: // unsigned 12 -32 bit (I type)
-                        offset = {{20{1'b0}},ins_i[11:0]};
+                        //3'b001: // unsigned 12 -32 bit (I type)
+                        //offset = {{20{1'b0}},ins_i[11:0]};
                         
                         3'b010: // signed 12 -32 bit (S type)
                         offset = (ins_s[11]) ? {{20{1'b1}},ins_s[11:0]} : {{20{1'b0}} , ins_s[11:0]};

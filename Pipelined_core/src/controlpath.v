@@ -46,31 +46,31 @@ output reg w,hw,b
     
                             case(funct3)
                             
-                            3'b000 : begin
+                            3'b000 : begin // add / sub
                                         if(funct7 == 7'd0)
-                                            alucontrol = 4'd0;
+                                            alucontrol = 4'd0; // add
                                         else
-                                            alucontrol = 4'd1;
+                                            alucontrol = 4'd1; // sub
                                      end
     
-                            3'b100 : alucontrol = 4'd5;
+                            3'b100 : alucontrol = 4'd5; // xor
                            
-                            3'b110 : alucontrol = 4'd3;
+                            3'b110 : alucontrol = 4'd3; // or
                             
-                            3'b111 : alucontrol = 4'd4;
+                            3'b111 : alucontrol = 4'd4; // and
                             
-                            3'b001 : alucontrol = 4'd2;
+                            3'b001 : alucontrol = 4'd2; // sll
                             
-                            3'b101 : begin
+                            3'b101 : begin // srl / sra
                                         if(funct7 == 7'd0) 
-                                            alucontrol = 4'd7;
+                                            alucontrol = 4'd7; // srl
                                         else 
-                                            alucontrol = 4'd8;
+                                            alucontrol = 4'd8; // sra
                                     end
                             
-                            3'b010 : alucontrol = 4'd9;
+                            3'b010 : alucontrol = 4'd9; // slt
                             
-                            3'b011 : alucontrol = 4'd6;
+                            3'b011 : alucontrol = 4'd6; // sltu
                             
                             endcase
                         end
@@ -87,19 +87,19 @@ output reg w,hw,b
                                 imsrc = 3'b101;
                                 
                                 case(funct3)
-                                3'b000 : alucontrol = 4'd0;
-                                3'b100 : alucontrol = 4'd5;
-                                3'b110 : alucontrol = 4'd3;
-                                3'b111 : alucontrol = 4'd4;
-                                3'b001 : alucontrol = 4'd2;
-                                3'b101 : begin
+                                3'b000 : alucontrol = 4'd0; // addi
+                                3'b100 : alucontrol = 4'd5; // xori
+                                3'b110 : alucontrol = 4'd3; // ori
+                                3'b111 : alucontrol = 4'd4; // andi
+                                3'b001 : alucontrol = 4'd2; // slli
+                                3'b101 : begin // srli / srai
                                             if(imm[11:5] == 7'd0) 
-                                                alucontrol = 4'd7;
+                                                alucontrol = 4'd7; // srli
                                             else 
-                                                alucontrol = 4'd8;
+                                                alucontrol = 4'd8; // srai
                                          end
-                                3'b010 : alucontrol = 4'd9;
-                                3'b011 : alucontrol = 4'd6;
+                                3'b010 : alucontrol = 4'd9; // slti
+                                3'b011 : alucontrol = 4'd6; // sltiu
                                 endcase
                             end
                             
@@ -115,23 +115,23 @@ output reg w,hw,b
                                 
                                 case(funct3)
                                 3'b000 : begin
-                                            b=1;hw=0;w=0;
+                                            b=1;hw=0;w=0; // lb
                                          end
     
                                 3'b001 : begin
-                                            hw=1;w=0;b=0;
+                                            hw=1;w=0;b=0; // lh 
                                          end
     
                                 3'b010 : begin
-                                            w=1;hw=0;b=0;
+                                            w=1;hw=0;b=0; // lw
                                          end
                                 
                                 3'b100 : begin
-                                            b=1;hw=0;w=0;
+                                            b=1;hw=0;w=0; // lbu
                                          end
     
                                 3'b101 : begin
-                                            hw=1;b=0;w=0;
+                                            hw=1;b=0;w=0; // lhu
                                          end
                                 endcase
                             end
@@ -148,15 +148,15 @@ output reg w,hw,b
                                 
                                 case(funct3) 
                                 3'b000 : begin
-                                            b=1;hw=0;w=0;
+                                            b=1;hw=0;w=0; // sb
                                          end
     
                                 3'b001 : begin
-                                            hw=1;b=0;w=0;
+                                            hw=1;b=0;w=0; //sh
                                          end
                                 
                                 3'b010 : begin
-                                            w=1;hw=0;b=0;
+                                            w=1;hw=0;b=0; //sw
                                          end
                                 endcase
                              end

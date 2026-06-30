@@ -1,27 +1,8 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 18.01.2026 17:59:31
-// Design Name: 
-// Module Name: main_decoder
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
 
 
 module main_decoder(
-input  [6:0] opcode,
+    input  [6:0] opcode,
     output reg   branch,
     output reg   memRead,
     output reg   memtoReg,

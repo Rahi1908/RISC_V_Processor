@@ -2,7 +2,7 @@
 
 module alu_pc(
 input reset,
-input [31:0] four_pc,
+input [31:0] next_addr,
 input signed [31:0] offset,
 output reg signed [31:0] updated_pc
     );
@@ -12,7 +12,7 @@ output reg signed [31:0] updated_pc
             updated_pc = 32'd0;
         else 
             begin
-                updated_pc = $signed(four_pc) + $signed(offset);
+                updated_pc = $signed(next_addr) + $signed(offset);
             end
     end  
     

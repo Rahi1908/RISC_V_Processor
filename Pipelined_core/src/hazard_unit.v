@@ -17,12 +17,12 @@ output stall
 
     // ForwardAE for rs1
     assign ForwardAE = (reset == 1'b1) ? 2'b00 : 
-                       ((RegWrite_s4 == 1'b1) & (RdM != 5'd0) & (RdM == Rs1E)) ? 2'b10 :
-                       ((RegWrite_s5 == 1'b1) & (RdW != 5'd0) & (RdW == Rs1E)) ? 2'b01 : 2'b00;
+                       ((RegWrite_s4 == 1'b1) && (RdM != 5'd0) && (RdM == Rs1E)) ? 2'b10 :
+                       ((RegWrite_s5 == 1'b1) && (RdW != 5'd0) && (RdW == Rs1E)) ? 2'b01 : 2'b00;
     // ForwardBE for rs2
     assign ForwardBE = (reset == 1'b1) ? 2'b00 : 
-                       ((RegWrite_s4 == 1'b1) & (RdM != 5'd0) & (RdM == Rs2E)) ? 2'b10 :
-                       ((RegWrite_s5 == 1'b1) & (RdW != 5'd0) & (RdW == Rs2E)) ? 2'b01 : 2'b00;
+                       ((RegWrite_s4 == 1'b1) && (RdM != 5'd0) && (RdM == Rs2E)) ? 2'b10 :
+                       ((RegWrite_s5 == 1'b1) && (RdW != 5'd0) && (RdW == Rs2E)) ? 2'b01 : 2'b00;
                        
     
 endmodule

@@ -1,26 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 21.01.2026 19:04:23
-// Design Name: 
-// Module Name: register_file
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
-
-// Do not modify this file!
 
 module register_file (
     input clk,
@@ -35,7 +13,7 @@ module register_file (
 );
     reg [31:0] regs [0:31];
 
-// Do not modify this file!
+
     assign readData1 = (readReg1!=0)?regs[readReg1]:0;
     assign readData2 = (readReg2!=0)?regs[readReg2]:0;
      
