@@ -97,7 +97,7 @@ Pipelined Processor Output
 ### 3.4 Speedup
 - Speedup = T_single / T_pipeline_actual = 760 / 580 = 1.3103× (38/29)
 
-![image_alt]()
+<img src="https://github.com/Rahi1908/RISC_V_Processor/blob/b36ed30f5d1d9aeba49501b2d5ed577ba30b324a/Single_cycle_core/docs/metrics.png" width="500" alt="pipelined_architecture">
 
 ---
 
