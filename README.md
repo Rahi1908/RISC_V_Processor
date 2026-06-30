@@ -12,7 +12,7 @@ A Verilog implementation of a RISC-V 32-bit integer (RV32I) processor built two 
 
 ### Single-Cycle Design Architecture 
 
-<img src="https://github.com/Rahi1908/RISC_V_Processor/raw/ff484e60ca3a84427d882ef8c2ba717bad158e94/Single_cycle_core/docs/top_level.png" width="500" alt="top_level_block_diagram">
+<img src="https://github.com/Rahi1908/RISC_V_Processor/raw/ff484e60ca3a84427d882ef8c2ba717bad158e94/Single_cycle_core/docs/top_level.png" width="600" alt="top_level_block_diagram">
 
 
 This diagram shows the classic single-cycle RV32I datapath: the PC feeds instruction memory, whose output splits into the opcode (driving the Control unit for Branch/MemRead/MemtoReg/ALUOp/MemWrite/ALUSrc/RegWrite), the register-file address fields (rs1/rs2/rd), and the immediate generator. ALUSrc selects between register data 2 and the sign-extended immediate as the second ALU operand; ALUOp plus funct fields go through the ALU control to pick the operation, and the Zero flag combined with Branch decides (via the AND gate and PC-target adder) whether PC+4 or the branch target is selected for the next PC. MemRead/MemWrite control data memory access, and MemtoReg chooses between ALU result and memory read data for the final register write-back, all happening combinationally within one clock cycle.
