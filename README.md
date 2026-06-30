@@ -1,12 +1,18 @@
-# RISC-V 5-Stage Pipelined Core (Derived from Single-Cycle)
+# RISC-V RV32I Processor Design
 
-A Verilog implementation of a RISC-V 32-bit integer (RV32I) processor built two ways — a single-cycle design and a 5-stage pipelined design — both simulated and verified in Xilinx Vivado.
+A Verilog implementation of a RISC-V 32-bit integer (RV32I) processor built two ways, a single-cycle design and a 5-stage pipelined design, both simulated and verified in Xilinx Vivado.
+
+**Single-cycle RV32I core**: fetch–decode–execute–mem–writeback complete each clock via combinational control_unit/alu_decoder, register_file, and data_memory; simple but clock period bounded by slowest instruction (loads).
+
+**5-stage pipelined RV32I core**: PC→IF→ID→EX→MEM→WB via pp_stage_2-5 registers, with hazard_unit handling RAW hazards through EX/MEM and MEM/WB forwarding (ForwardAE/BE) and load-use stalls, plus branch/jump flush via bj_det.
 
 ---
 
 ## Project Overview
 
-### Single-Cycle Design
+### Single-Cycle Design Architecture 
+
+![image_alt]()
 A clean, reference implementation where every instruction completes in a single clock cycle across all stages — Fetch, Decode, Execute, Memory, and Writeback. Simple control logic with a two-level decoder (main decoder + ALU decoder). Supports **R-type, I-type (arithmetic), Load (`LW` only), Store (`SW` only), and Branch (`BEQ` only)** — totalling **~20 instructions**.
 
 ### Pipelined Design
