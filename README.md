@@ -65,36 +65,37 @@ Single Cycle Processor Output
 
 ![image_alt](https://github.com/Rahi1908/RISC_V_Processor/blob/810a50441ff617e7c4f29a6bec719396335d47b1/Single_cycle_core/docs/result_1.png)
 
+Pipelined Processor Output 
+
+![image_alt](https://github.com/Rahi1908/RISC_V_Processor/blob/5ca225556ac437933e5d5c51ace7efad2ba81e80/Pipelined_core/docs/testbench_behav.wcfg%2030-06-2026%2009_37_22.png)
+
 
 ---
 ## Performance Analysis
 
-### 3.1 Single-Cycle Execution Time
-Each instruction takes exactly 1 cycle
-Total cycles: Cycles_single = N = 38
-Execution time: T_single = N × T_clk_single = 38 × 20 ns = 760 ns
+### Single-Cycle Execution Time
+- Each instruction takes exactly 1 cycle
+- Total cycles: Cycles_single = N = 38
+- Execution time: T_single = N × T_clk_single = 38 × 20 ns = 760 ns
+- The clock period (20 ns) is constrained by the slowest instruction's critical path.
 
-The clock period (20 ns) is constrained by the slowest instruction's critical path.
+### Pipelined Execution Time
+- For N instructions:
+- Cycles_pipeline_actual = N + (k − 1) + S + F
+- where: k = 5 (pipeline depth)
+- S = stall cycles = 0 (forwarding resolves all data hazards, no stalls observed)
+- F = flush/branch-penalty cycles = 16 (8 taken branches × 2 cycles penalty each)
 
-### 3.2 Pipelined Execution Time
-For N instructions:
-Cycles_pipeline_actual = N + (k − 1) + S + F
-where:
-
-k = 5 (pipeline depth)
-S = stall cycles = 0 (forwarding resolves all data hazards, no stalls observed)
-F = flush/branch-penalty cycles = 16 (8 taken branches × 2 cycles penalty each)
-
-Cycles_pipeline_actual = 38 + 4 + 0 + 16 = 58
-T_pipeline = 58 × T_clk_pipeline = 58 × 10 ns = 580 ns
+- Cycles_pipeline_actual = 38 + 4 + 0 + 16 = 58
+- T_pipeline = 58 × T_clk_pipeline = 58 × 10 ns = 580 ns
 
 ### 3.3 CPI Comparison
 
-Single-cycle CPI = 1.0
-Pipeline CPI = 58 / 38 = 1.526 (29/19)
+- Single-cycle CPI = 1.0
+- Pipeline CPI = 58 / 38 = 1.526 (29/19)
 
 ### 3.4 Speedup
-Speedup = T_single / T_pipeline_actual = 760 / 580 = 1.3103× (38/29)
+- Speedup = T_single / T_pipeline_actual = 760 / 580 = 1.3103× (38/29)
 
 ![image_alt]()
 
