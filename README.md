@@ -29,8 +29,6 @@ RTL analysis
 
 <img src="https://github.com/Rahi1908/RISC_V_Processor/raw/6cb5f2c270286093cc40f29c4edfe0e9272268a7/Pipelined_core/docs/architectture.jpeg" width="900" alt="pipelined_architecture">
 
-The pipelined RV32I datapath extends the PC through five stages: IF fetches the instruction (instruction_mem) and computes PC+4 (alu_four); pp_stage_2 latches these into ID, where controlpath generates control signals, reg_file reads operands, and extender_offsethandler builds the immediate; pp_stage_3 latches into EX, where mux_32_3in forwarding muxes (driven by hazard_unit's ForwardAE/ForwardBE) select between register data, MEM-stage result, and WB-stage result to resolve RAW hazards, after which the ALU executes and alu_pc/bj_det compute and evaluate the branch/jump target; pp_stage_4 latches into MEM, where data_mem performs the load/store; and pp_stage_5 latches into WB, where mux_32_3in selects between ALU result, memory data, and PC+4 for register write-back. The hazard_unit also detects load-use hazards and stalls the IF/ID boundary one cycle, while a taken branch/jump flushes the IF and ID stage registers via the bj signal.
-
 Pipelined supports (everything above, plus):
 
 - Load: LB, LH, LW (byte/half/word granularity via w/hw/b signals)
@@ -41,6 +39,8 @@ Pipelined supports (everything above, plus):
 - Load-use stall (hazard_unit, 1-cycle)
 - Branch/jump flush (bj_det → flush signal, clears IF/ID)
 - Pipeline registers at all 4 boundaries (pp_stage_2 through pp_stage_5)
+
+![image_alt](https://github.com/Rahi1908/RISC_V_Processor/blob/039b0489ef0e0aae468515df26a9ff6ccb5eda1e/Pipelined_core/docs/RTL_analysis.png) 
 
 
 ---
