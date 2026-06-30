@@ -108,7 +108,7 @@ Single cycle
 
 Pipelined 
 
-![image_alt]()
+![image_alt](https://github.com/Rahi1908/RISC_V_Processor/blob/4ce615956ccc184bf1e6141f3264a0fd2b717cbf/Pipelined_core/docs/reports.png)
 
 
 ---
@@ -116,17 +116,9 @@ Pipelined
 
 - [ ] Add full RV32M extension (multiply/divide)
 - [ ] Implement a proper branch predictor to reduce flush penalty
-- [ ] FPGA deployment with UART-based program loader (replacing `$readmemh`)
+- [ ] FPGA Implementation
 - [ ] Add CSR registers and exception handling
 - [ ] Extend to RV64I
-
----
-
-## RTL Analysis
-
-RTL schematics were generated in Xilinx Vivado using **RTL Analysis → Open Elaborated Design**. The schematic confirms correct module hierarchy, datapath connections, and pipeline register placement across all 5 stages.
-
-> ⚠️ Testbench files should be excluded when running elaboration in Vivado.
 
 ---
 
