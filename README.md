@@ -12,7 +12,7 @@ A Verilog implementation of a RISC-V 32-bit integer (RV32I) processor built two 
 
 ### Single-Cycle Design Architecture 
 
-<img src="https://github.com/Rahi1908/RISC_V_Processor/raw/ff484e60ca3a84427d882ef8c2ba717bad158e94/Single_cycle_core/docs/top_level.png" width="900" alt="top_level_block_diagram">
+<img src="https://github.com/Rahi1908/RISC_V_Processor/raw/ff484e60ca3a84427d882ef8c2ba717bad158e94/Single_cycle_core/docs/top_level.png" width="800" alt="top_level_block_diagram">
 
 
 This diagram shows the classic single-cycle RV32I datapath: the PC feeds instruction memory, whose output splits into the opcode (driving the Control unit for Branch/MemRead/MemtoReg/ALUOp/MemWrite/ALUSrc/RegWrite), the register-file address fields (rs1/rs2/rd), and the immediate generator. ALUSrc selects between register data 2 and the sign-extended immediate as the second ALU operand; ALUOp plus funct fields go through the ALU control to pick the operation, and the Zero flag combined with Branch decides (via the AND gate and PC-target adder) whether PC+4 or the branch target is selected for the next PC. MemRead/MemWrite control data memory access, and MemtoReg chooses between ALU result and memory read data for the final register write-back, all happening combinationally within one clock cycle.
@@ -27,7 +27,7 @@ Single-Cycle supports:
 
 ### Pipelined Design
 
-<img src="https://github.com/Rahi1908/RISC_V_Processor/raw/6cb5f2c270286093cc40f29c4edfe0e9272268a7/Pipelined_core/docs/architectture.jpeg" width="800" alt="pipelined_architecture">
+<img src="https://github.com/Rahi1908/RISC_V_Processor/raw/6cb5f2c270286093cc40f29c4edfe0e9272268a7/Pipelined_core/docs/architectture.jpeg" width="900" alt="pipelined_architecture">
 
 The pipelined RV32I datapath extends the PC through five stages: IF fetches the instruction (instruction_mem) and computes PC+4 (alu_four); pp_stage_2 latches these into ID, where controlpath generates control signals, reg_file reads operands, and extender_offsethandler builds the immediate; pp_stage_3 latches into EX, where mux_32_3in forwarding muxes (driven by hazard_unit's ForwardAE/ForwardBE) select between register data, MEM-stage result, and WB-stage result to resolve RAW hazards, after which the ALU executes and alu_pc/bj_det compute and evaluate the branch/jump target; pp_stage_4 latches into MEM, where data_mem performs the load/store; and pp_stage_5 latches into WB, where mux_32_3in selects between ALU result, memory data, and PC+4 for register write-back. The hazard_unit also detects load-use hazards and stalls the IF/ID boundary one cycle, while a taken branch/jump flushes the IF and ID stage registers via the bj signal.
 
