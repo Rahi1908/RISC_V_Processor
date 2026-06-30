@@ -61,7 +61,9 @@ Final register state:
 - t1 (x6) = 10
 - all other registers = 0
 
-![image_alt]()
+Single Cycle Processor Output
+
+![image_alt](https://github.com/Rahi1908/RISC_V_Processor/blob/810a50441ff617e7c4f29a6bec719396335d47b1/Single_cycle_core/docs/result_1.png)
 
 
 ---
